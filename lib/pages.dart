@@ -18,9 +18,7 @@ class StartPageWidget extends StatelessWidget {
               allowedExtensions: ['pdf']);
 
           if (result != null) {
-            for (var element in result.names) {
-              print(element);
-            }
+            //Files here
           }
         },
         child: const Text("Upload files (pdf)"),
