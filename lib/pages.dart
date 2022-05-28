@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
 
 class StartPageWidget extends StatelessWidget {
   const StartPageWidget({Key? key}) : super(key: key);
@@ -7,7 +10,18 @@ class StartPageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () async {
+          FilePickerResult? result = await FilePicker.platform.pickFiles(
+              allowMultiple: true,
+              type: FileType.custom,
+              allowedExtensions: ['pdf']);
+
+          if (result != null) {
+            for (var element in result.names) {
+              print(element);
+            }
+          }
+        },
         child: const Text("Upload files (pdf)"),
       ),
     );
