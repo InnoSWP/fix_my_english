@@ -5,6 +5,7 @@ void main() {
   runApp(const MyApp());
 }
 
+//Root widget that will display other widgets
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -29,6 +30,7 @@ class MainApp extends StatefulWidget {
   State<MainApp> createState() => _MainAppState();
 }
 
+//The main switching widget. Will display appropriate widget depending on state of application.
 class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {

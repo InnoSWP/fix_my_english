@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 
+//Starting widget with upload button and logo
 class StartPageWidget extends StatelessWidget {
   const StartPageWidget({Key? key}) : super(key: key);
 
