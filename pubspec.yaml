@@ -30,6 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
   file_picker: ^4.6.0
+  syncfusion_flutter_pdf: ^20.1.58-beta
 
 
   # The following adds the Cupertino Icons font to your application.

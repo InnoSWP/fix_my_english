@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'pdf_reader.dart';
 
 //Starting widget with upload button and logo
 class StartPageWidget extends StatelessWidget {
@@ -18,7 +19,7 @@ class StartPageWidget extends StatelessWidget {
               allowedExtensions: ['pdf']);
 
           if (result != null) {
-            //Files here
+            PDFToRawTextConverter(result.files[0].bytes!);
           }
         },
         child: const Text("Upload files (pdf)"),
