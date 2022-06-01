@@ -12,6 +12,7 @@ class StartPageWidget extends StatelessWidget {
   //Controller to get text from text field
   final TextEditingController textEditingController = TextEditingController();
 
+  ///Constructs start page widget. Requires callback [onFileUploaded].
   StartPageWidget({Key? key, required this.onFileUploaded}) : super(key: key);
 
   @override
