@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'pages.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const FixMyEnglishApp());
 }
 
-//Root widget that will display other widgets
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+///Entry widget that builds all other widgets
+class FixMyEnglishApp extends StatelessWidget {
+  const FixMyEnglishApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,24 +16,60 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MainApp(title: 'Fix my English'),
+      home: const RootWidget(),
     );
   }
 }
 
-class MainApp extends StatefulWidget {
-  const MainApp({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+///The root widget to display appropriate page widget depending on current page.
+class RootWidget extends StatefulWidget {
+  const RootWidget({Key? key}) : super(key: key);
 
   @override
-  State<MainApp> createState() => _MainAppState();
+  State<RootWidget> createState() => _RootWidget();
 }
 
-//The main switching widget. Will display appropriate widget depending on state of application.
-class _MainAppState extends State<MainApp> {
+//Application pages
+enum AppPages { startPage, mainPage }
+
+///Class that represents state controll of root widget
+class _RootWidget extends State<RootWidget> {
+  //Current application page
+  late AppPages appState;
+  //Start page widget
+  late StartPageWidget startPage;
+  //Main page widget
+  late MainPageWidget mainPage;
+
+  @override
+  void initState() {
+    super.initState();
+
+    //The inital page is start page
+    appState = AppPages.startPage;
+
+    //Create start page widget, and listen for uploading event
+    startPage = StartPageWidget(onFileUploaded: (requests) {
+      setState(() {
+        //When user uploads files switch to main page
+        appState = AppPages.mainPage;
+        //Provide all requests made in start page to main page
+        mainPage.addManyAnalyses(requests);
+      });
+    });
+
+    //Create main page widget
+    mainPage = MainPageWidget();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: StartPageWidget());
+    //Depending on current application page load appropriate page widget
+    switch (appState) {
+      case AppPages.startPage:
+        return startPage;
+      case AppPages.mainPage:
+        return mainPage;
+    }
   }
 }
