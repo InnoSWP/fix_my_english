@@ -35,7 +35,10 @@ class _AnalyzedTextWidget extends State<AnalyzedTextWidget> {
         builder: (BuildContext context, AsyncSnapshot<AnalysisData> snapshot) {
           if (snapshot.hasData) {
             //If future recieve text, show it
-            return Text(snapshot.data!.rawText);
+            return SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Text(snapshot.data!.rawText),
+            );
           } else {
             //If text is not recieved yet, show progress indicator
             return const SizedBox(
